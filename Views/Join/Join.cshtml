@@ -1,0 +1,82 @@
+﻿@model Online_Quiz.Models.Paper
+
+@{
+    ViewData["Title"] = "Join";
+    var data = ViewBag.exist;
+    var count = 0;
+}
+
+<h1>Join</h1>
+
+<h4>Paper</h4>
+<hr />
+@if (ViewBag.exist == null)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Join">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PaperCode" class="control-label"></label>
+                    <input asp-for="PaperCode" class="form-control" />
+                    <span asp-validation-for="PaperCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+
+
+    <div class="card">
+        @foreach (var question in Model.Questions)
+        {
+            count++;
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-1"><strong><h3>@count</h3></strong></div>
+                    <div class="col-11">
+                        <input type="text"  value="@question.QuestionName" class="form-control" disabled />
+
+                        <div class="options">
+                            @foreach (var option in question.Options)
+                            {
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-1 ">
+                                            <input type="radio" asp-for="@option.Correct" checked="@option.Correct" class="custom-radio" style="background-color:green" name="@question.QuestionId" value="true">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <input type="text" value="@option.OptionName" class="form-control" disabled />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-primary" asp-action="JoinQuiz">submit Answer</button>
+
+
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+
+
+        }
+    </script>
+
+}
+
