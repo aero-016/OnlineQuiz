@@ -24,6 +24,13 @@ namespace Online_Quiz.Controllers
         public IActionResult Join(Paper paper)
         {
             var exist = _paperRepository.GetAllPapers().First(m => m.PaperCode == paper.PaperCode);
+            foreach(var question in exist.Questions)
+            {
+                foreach(var option in question.Options)
+                {
+                    option.Correct = false;
+                }
+            }
             if (exist.StartDate < DateTime.Now && exist.EndDate > DateTime.Now)
             {
                 ViewData["exist"] = exist;
@@ -37,9 +44,13 @@ namespace Online_Quiz.Controllers
             }
         }
 
+
+
         [HttpPost]
-        public IActionResult JoinQuiz()
+        public IActionResult JoinQuiz(Paper paper)
         {
+            //return Json(paper);
+            var answerSheet = _paperRepository.AddAnswerSheet(paper,User.Identity.Name);
 
             return View();
         }

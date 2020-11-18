@@ -18,12 +18,13 @@ namespace Online_Quiz.Models
         [Required]
         public int PaperId { get; set; }
         public Paper Paper { get; set; }
-        public ICollection<Option> Options { get; set; }
-        public Question(ICollection<Option> options)
+        public List<Option> Options { get; set; }
+        public Question(List<Option> options)
         {
             options = Options;
         }
-        public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
+       public List<AnswerSheet_Question> AnswerSheet_Questions { get; set; }
+        //   public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
 
     }
 

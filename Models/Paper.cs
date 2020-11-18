@@ -18,10 +18,10 @@ namespace Online_Quiz.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Pmarks { get; set; }
-        public ICollection<Question> Questions{  get; set; }
-        public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
+        public List<Question> Questions{  get; set; }
+      //  public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
 
-        public Paper(ICollection<Question> questions)
+        public Paper(List<Question> questions)
         {
             questions = Questions;
         }

@@ -13,10 +13,27 @@ namespace Online_Quiz.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AnswerSheet_Question>().HasKey(AQ => new { AQ.AnswerSheetId, AQ.QuestionId });
+            modelBuilder.Entity<AnswerSheet_Question>()
+    .HasOne<AnswerSheet>(AQ => AQ.AnswerSheet)
+    .WithMany(A => A.AnswerSheet_Questions)
+    .HasForeignKey(AQ => AQ.AnswerSheetId);
+
+            modelBuilder.Entity<AnswerSheet_Question>()
+    .HasOne<Question>(AQ => AQ.Question)
+    .WithMany(A => A.AnswerSheet_Questions)
+    .HasForeignKey(AQ => AQ.QuestionId);
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Paper> Papers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
-       // public DbSet<AttendeePaper> AttendeePapers { get; set; }
-        public DbSet<AttendeeQuestion> AttendeeQuestions { get; set; }
+        // public DbSet<AttendeePaper> AttendeePapers { get; set; }
+
+        public DbSet<AnswerSheet> AnswerSheets { get; set; }
+        public DbSet<AnswerSheet_Question> AnswerSheet_Questions { get; set; }
     }
 }

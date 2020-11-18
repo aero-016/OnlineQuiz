@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Quiz.Data;
 
 namespace Online_Quiz.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118090257_quiz5")]
+    partial class quiz5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,21 +228,7 @@ namespace Online_Quiz.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ObtainedMarks")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PaperId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("SubmitTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("AnswerSheetId");
-
-                    b.HasIndex("PaperId");
 
                     b.ToTable("AnswerSheets");
                 });
@@ -250,15 +238,10 @@ namespace Online_Quiz.Data.Migrations
                     b.Property<int>("AnswerSheetId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Optionid")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("AnswerSheetId", "QuestionId");
-
-                    b.HasIndex("Optionid");
 
                     b.HasIndex("QuestionId");
 
@@ -392,13 +375,6 @@ namespace Online_Quiz.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Online_Quiz.Models.AnswerSheet", b =>
-                {
-                    b.HasOne("Online_Quiz.Models.Paper", "Paper")
-                        .WithMany()
-                        .HasForeignKey("PaperId");
-                });
-
             modelBuilder.Entity("Online_Quiz.Models.AnswerSheet_Question", b =>
                 {
                     b.HasOne("Online_Quiz.Models.AnswerSheet", "AnswerSheet")
@@ -406,10 +382,6 @@ namespace Online_Quiz.Data.Migrations
                         .HasForeignKey("AnswerSheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Online_Quiz.Models.Option", "selectedoption")
-                        .WithMany()
-                        .HasForeignKey("Optionid");
 
                     b.HasOne("Online_Quiz.Models.Question", "Question")
                         .WithMany("AnswerSheet_Questions")

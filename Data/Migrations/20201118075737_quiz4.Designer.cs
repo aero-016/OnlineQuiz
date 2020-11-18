@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Quiz.Data;
 
 namespace Online_Quiz.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118075737_quiz4")]
+    partial class quiz4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,50 +221,21 @@ namespace Online_Quiz.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Online_Quiz.Models.AnswerSheet", b =>
+            modelBuilder.Entity("Online_Quiz.Models.AttendeeQuestion", b =>
                 {
-                    b.Property<int>("AnswerSheetId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ObtainedMarks")
-                        .HasColumnType("int");
-
                     b.Property<int?>("PaperId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("SubmitTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AnswerSheetId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PaperId");
 
-                    b.ToTable("AnswerSheets");
-                });
-
-            modelBuilder.Entity("Online_Quiz.Models.AnswerSheet_Question", b =>
-                {
-                    b.Property<int>("AnswerSheetId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Optionid")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnswerSheetId", "QuestionId");
-
-                    b.HasIndex("Optionid");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("AnswerSheet_Questions");
+                    b.ToTable("AttendeeQuestions");
                 });
 
             modelBuilder.Entity("Online_Quiz.Models.Option", b =>
@@ -392,30 +365,11 @@ namespace Online_Quiz.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Online_Quiz.Models.AnswerSheet", b =>
+            modelBuilder.Entity("Online_Quiz.Models.AttendeeQuestion", b =>
                 {
                     b.HasOne("Online_Quiz.Models.Paper", "Paper")
                         .WithMany()
                         .HasForeignKey("PaperId");
-                });
-
-            modelBuilder.Entity("Online_Quiz.Models.AnswerSheet_Question", b =>
-                {
-                    b.HasOne("Online_Quiz.Models.AnswerSheet", "AnswerSheet")
-                        .WithMany("AnswerSheet_Questions")
-                        .HasForeignKey("AnswerSheetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Online_Quiz.Models.Option", "selectedoption")
-                        .WithMany()
-                        .HasForeignKey("Optionid");
-
-                    b.HasOne("Online_Quiz.Models.Question", "Question")
-                        .WithMany("AnswerSheet_Questions")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Online_Quiz.Models.Option", b =>

@@ -23,6 +23,24 @@
     <Compile Remove="Data\Migrations\20201111112559_Quiz9.Designer.cs" />
     <Compile Remove="Data\Migrations\20201111113129_Quiz10.cs" />
     <Compile Remove="Data\Migrations\20201111113129_Quiz10.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118080559_quiz5.cs" />
+    <Compile Remove="Data\Migrations\20201118080559_quiz5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118081941_quiz6.cs" />
+    <Compile Remove="Data\Migrations\20201118081941_quiz6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118084036_quiz5.cs" />
+    <Compile Remove="Data\Migrations\20201118084036_quiz5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118085111_quiz5.cs" />
+    <Compile Remove="Data\Migrations\20201118085111_quiz5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118085646_quiz5.cs" />
+    <Compile Remove="Data\Migrations\20201118085646_quiz5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118090032_quiz5.cs" />
+    <Compile Remove="Data\Migrations\20201118090032_quiz5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118090414_quiz6.cs" />
+    <Compile Remove="Data\Migrations\20201118090414_quiz6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118091913_quiz7.cs" />
+    <Compile Remove="Data\Migrations\20201118091913_quiz7.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201118092722_quiz7.cs" />
+    <Compile Remove="Data\Migrations\20201118092722_quiz7.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

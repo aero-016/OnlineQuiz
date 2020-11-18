@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Join";
-    var data = ViewBag.exist;
+    
     var count = 0;
 }
 
@@ -31,27 +31,29 @@
 else
 {
 
-
+    <form asp-action="JoinQuiz">
+    <input type="hidden" asp-for="@Model.PaperCode" />
     <div class="card">
-        @foreach (var question in Model.Questions)
+       
+        @for (var i = 0; i < Model.Questions.Count(); i++)
         {
-            count++;
-            <div class="card-header">
+
+          <div class="card-header">
                 <div class="row">
-                    <div class="col-1"><strong><h3>@count</h3></strong></div>
+                    <div class="col-1"><strong><h3>{@i}+1</h3></strong></div>
                     <div class="col-11">
-                        <input type="text"  value="@question.QuestionName" class="form-control" disabled />
+                        <input type="text" asp-for="@Model.Questions[i].QuestionName"  class="onlyquestion form-control"  />
 
                         <div class="options">
-                            @foreach (var option in question.Options)
+                            @for(var j=0;j<Model.Questions[i].Options.Count();j++)
                             {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-1 ">
-                                            <input type="radio" asp-for="@option.Correct" checked="@option.Correct" class="custom-radio" style="background-color:green" name="@question.QuestionId" value="true">
+                                            <input type="radio" asp-for="@Model.Questions[i].Options[j].Correct" class="custom-radio" style="background-color:green" value="true">
                                         </div>
                                         <div class="col-sm-11">
-                                            <input type="text" value="@option.OptionName" class="form-control" disabled />
+                                            <input type="text" asp-for="@Model.Questions[i].Options[j].OptionName" class="form-control">
                                         </div>
                                     </div>
 
@@ -63,9 +65,9 @@ else
             </div>
         }
     </div>
-
-    <button class="btn btn-primary" asp-action="JoinQuiz">submit Answer</button>
-
+   
+        <button class="btn btn-primary" id="Join" >submit Answer</button>
+    </form>
 
 }
 
@@ -73,7 +75,7 @@ else
     <script>
         $(document).ready(function () {
 
-
+           
 
         }
     </script>

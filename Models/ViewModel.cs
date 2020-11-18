@@ -10,7 +10,7 @@ namespace Online_Quiz.Models
         public IEnumerable<Paper> Papers { get; set; }
         public IEnumerable<Question> Questions { get; set; }
         public IEnumerable<Option> Options { get; set; }
-        public IEnumerable<AttendeeQuestion> AttendeeQuestions { get; set; }
+        
 
     }
 

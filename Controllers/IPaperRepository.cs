@@ -14,12 +14,14 @@ namespace Online_Quiz.Controllers
         Question AddQuestion(Question question);
         
         Option AddOption(Option option);
-        AttendeeQuestion AddAttendeeQuestion(AttendeeQuestion attendeeQuestion);
+        
         Paper GetPaper(int id);
         List<Paper> GetAllPapers();
         IEnumerable<Option> GetAllOptions();
         IEnumerable<Question> GetAllQuestions();
-        IEnumerable<AttendeeQuestion> GetAllAttendeeQuestions();
+
+        AnswerSheet AddAnswerSheet(Paper paper,String user);
+        
 
     }
 }

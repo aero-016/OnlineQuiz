@@ -45,21 +45,53 @@ namespace Online_Quiz.Controllers
             return option;
 
         }
-        public AttendeeQuestion AddAttendeeQuestion(AttendeeQuestion attendeeQuestion)
+        public AnswerSheet AddAnswerSheet(Paper paper,String user)
         {
-            context.AttendeeQuestions.Add(attendeeQuestion);
+            var totalMarks = 0;
+            var answerSheet = new AnswerSheet();
+            answerSheet.Paper = GetAllPapers().First(paper1 => paper1.PaperCode == paper.PaperCode);
+            answerSheet.User = user;
+            System.Diagnostics.Debug.Print(answerSheet.User+"----------------");
+            context.AnswerSheets.Add(answerSheet);
             context.SaveChanges();
-            return attendeeQuestion;
+            for (var i=0;i<paper.Questions.Count();i++)
+            {
+                var answerSheet_Question = new AnswerSheet_Question();
+                answerSheet_Question.Question = answerSheet.Paper.Questions[i];
+                for (var j= 0;j < paper.Questions[i].Options.Count();j++)
+                {
 
+                    if (paper.Questions[i].Options[j].Correct==true) {
+                        for(var k=0;k< paper.Questions[i].Options.Count(); k++)
+                        {
+                            if( answerSheet.Paper.Questions[i].Options[k].Correct==true && k == j)
+                            {
+                                totalMarks++;
+                            }
+                        }
+                        answerSheet_Question.selectedoption = answerSheet.Paper.Questions[i].Options[j];
+                     }
+                }
+               
+                answerSheet_Question.AnswerSheet = answerSheet;
+                context.AnswerSheet_Questions.Add(answerSheet_Question);
+                context.SaveChanges();
+            }
+
+            answerSheet.ObtainedMarks = totalMarks;
+            answerSheet.SubmitTime = DateTime.Now;
+            context.SaveChanges();
+            return answerSheet;
         }
 
         public Paper GetPaper(int id)
         {
             return context.Papers.Find(id);
         }
-        List<Paper> IPaperRepository.GetAllPapers()
+       public List<Paper> GetAllPapers()
         {
-            return context.Papers.Include(papers => papers.Questions).ThenInclude(questions=>questions.Options).ToList();
+            return context.Papers.Include(papers => papers.Questions).ThenInclude(questions => questions.Options).ToList();
+
         }
         IEnumerable<Question> IPaperRepository.GetAllQuestions()
         {
@@ -70,9 +102,6 @@ namespace Online_Quiz.Controllers
             return context.Options;
 
         }
-        IEnumerable<AttendeeQuestion> IPaperRepository.GetAllAttendeeQuestions()
-        {
-            return context.AttendeeQuestions;
-        }
+       
     }
 }

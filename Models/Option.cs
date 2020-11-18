@@ -14,6 +14,6 @@ namespace Online_Quiz.Models
         [Required]
         public int QuestionId { get; set; }
         public Question Question { get; set; }
-        public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
+       // public ICollection<AttendeeQuestion> AttendeeQuestions { get; set; }
     }
 }
