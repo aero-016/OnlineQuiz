@@ -1,13 +1,56 @@
-﻿@model Online_Quiz.Models.Paper
+﻿@model ViewModel
 
 @{
     ViewData["Title"] = "JoinQuiz";
-    var data = TempData["exist"];
     var count = 0;
-
 }
 
 
 
+<div>
+    <h4>AnswerSheet</h4>
+    <hr />
+    <dl class="row">
 
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AnswerSheets.ObtainedMarks)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AnswerSheets.ObtainedMarks)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="card">
+    @foreach (var question in Model.AnswerSheets.Paper.Questions)
+    {
+        count++;
+        <div class="card-header">
+            <div class="row">
+                <div class="col-1"><strong><h3>@count</h3></strong></div>
+                <div class="col-11">
+                    <input type="text" value="@question.QuestionName" class="form-control" disabled />
+
+                    <div class="options">
+                        @foreach (var option in question.Options)
+                        {
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-1 ">
+                                        <input type="radio" class="custom-radio" style="background-color:green" checked="@option.Correct" name="@question.QuestionId" value="true" disabled>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <input type="text" value="@option.OptionName" class="form-control" disabled />
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 

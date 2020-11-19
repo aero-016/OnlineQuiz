@@ -17,6 +17,8 @@ namespace Online_Quiz.Controllers
         
         Paper GetPaper(int id);
         List<Paper> GetAllPapers();
+        List<AnswerSheet_Question> GetAllAnswerSheet_Questions();
+        Boolean isSubmitted(String user, String paperCode);
         IEnumerable<Option> GetAllOptions();
         IEnumerable<Question> GetAllQuestions();
 

@@ -45,6 +45,20 @@ namespace Online_Quiz.Controllers
             return option;
 
         }
+        public Boolean isSubmitted(String user,String paperCode)
+        {
+            var paper = context.Papers.First(m => m.PaperCode == paperCode);
+            var paperid = paper.PaperId;
+            var ansersheet = context.AnswerSheets.Where(m => m.PaperId == paperid).FirstOrDefault(n=>n.User==user);
+            if (ansersheet != null) {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         public AnswerSheet AddAnswerSheet(Paper paper,String user)
         {
             var totalMarks = 0;
@@ -92,6 +106,10 @@ namespace Online_Quiz.Controllers
         {
             return context.Papers.Include(papers => papers.Questions).ThenInclude(questions => questions.Options).ToList();
 
+        }
+        public List<AnswerSheet_Question> GetAllAnswerSheet_Questions()
+        {
+            return context.AnswerSheet_Questions.ToList();
         }
         IEnumerable<Question> IPaperRepository.GetAllQuestions()
         {

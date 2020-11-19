@@ -15,6 +15,11 @@ namespace Online_Quiz.Models
         public int? PaperId { get; set; }
         public Paper Paper { get; set; }
         public List<AnswerSheet_Question> AnswerSheet_Questions { get; set; }
+
+        public static implicit operator List<object>(AnswerSheet v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

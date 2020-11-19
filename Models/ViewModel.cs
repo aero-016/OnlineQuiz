@@ -7,10 +7,10 @@ namespace Online_Quiz.Models
 {
     public class ViewModel
     {
-        public IEnumerable<Paper> Papers { get; set; }
-        public IEnumerable<Question> Questions { get; set; }
-        public IEnumerable<Option> Options { get; set; }
-        
+        public Paper Papers { get; set; }
+        public List<AnswerSheet_Question> AnswerSheet_Questions { get; set; }
+        public AnswerSheet AnswerSheets { get; set; }
+
 
     }
 
